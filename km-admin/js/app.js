@@ -58025,36 +58025,6 @@ angular.module('ui-leaflet')
 }(angular));
 
 
-var langController = angular.module('khpostal.locale.controller.locale', []);
-
-langController.controller('LangController', ['$translate', '$scope', '$state', 'leafletData', function ($translate, $scope, $state, leafletData) {
- 	var vm = this;
- 	vm.locales = $translate.getAvailableLanguageKeys();
- 	vm.currentLocale = $translate.use();
-	vm.changeLanguage = function (langKey) {
-		$translate.use(langKey).then(
-			function () {
-
-				leafletData.getMap("khmap").then(
-		   			 function (map) {
-		   			 	
-						map.eachLayer(function (layer) {
-				    		if ( !layer._url) {
-						 		map.removeLayer(layer)
-						 	}
-						}); 
-		   			 	map.setView([12.5446, 105.0470], '8');
-		   		});
-				$state.reload();
-			}
-		)
-	};
- 
-}]);
-var locale = angular.module('khpostal.locale', [
-        'khpostal.locale.controller.locale',
-    ]
-); 
 var locations = angular.module('khpostal.locations', [
 	'khpostal.locations.controller.locations',
 	'khpostal.locations.service.locations',
@@ -58237,6 +58207,36 @@ locationsService.service('locationService', function($http) {
         }
     }
 });
+var langController = angular.module('khpostal.locale.controller.locale', []);
+
+langController.controller('LangController', ['$translate', '$scope', '$state', 'leafletData', function ($translate, $scope, $state, leafletData) {
+ 	var vm = this;
+ 	vm.locales = $translate.getAvailableLanguageKeys();
+ 	vm.currentLocale = $translate.use();
+	vm.changeLanguage = function (langKey) {
+		$translate.use(langKey).then(
+			function () {
+
+				leafletData.getMap("khmap").then(
+		   			 function (map) {
+		   			 	
+						map.eachLayer(function (layer) {
+				    		if ( !layer._url) {
+						 		map.removeLayer(layer)
+						 	}
+						}); 
+		   			 	map.setView([12.5446, 105.0470], '8');
+		   		});
+				$state.reload();
+			}
+		)
+	};
+ 
+}]);
+var locale = angular.module('khpostal.locale', [
+        'khpostal.locale.controller.locale',
+    ]
+); 
 var map = angular.module('khpostal.map', [
         'khpostal.map.controller.map',
     ]
@@ -58330,7 +58330,7 @@ khpostal.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$
     		templateUrl: '/km-admin/views/errors/404.html'  
         })
         .state('home', {
-                url: '/',
+                url: '/km-admin/',
                 views: {
                     'map': {                        
                         templateUrl: '/km-admin/views/map.html',
