@@ -58023,36 +58023,6 @@ angular.module('ui-leaflet')
 }]);
 
 }(angular));
-var langController = angular.module('khpostal.locale.controller.locale', []);
-
-langController.controller('LangController', ['$translate', '$scope', '$state', 'leafletData', function ($translate, $scope, $state, leafletData) {
- 	var vm = this;
- 	vm.locales = $translate.getAvailableLanguageKeys();
- 	vm.currentLocale = $translate.use();
-	vm.changeLanguage = function (langKey) {
-		$translate.use(langKey).then(
-			function () {
-
-				leafletData.getMap("khmap").then(
-		   			 function (map) {
-		   			 	
-						map.eachLayer(function (layer) {
-				    		if ( !layer._url) {
-						 		map.removeLayer(layer)
-						 	}
-						}); 
-		   			 	map.setView([12.5446, 105.0470], '8');
-		   		});
-				$state.reload();
-			}
-		)
-	};
- 
-}]);
-var locale = angular.module('khpostal.locale', [
-        'khpostal.locale.controller.locale',
-    ]
-); 
 
 
 var locations = angular.module('khpostal.locations', [
@@ -58231,12 +58201,42 @@ var locationsService = angular.module('khpostal.locations.service.locations', []
 locationsService.service('locationService', function($http) { 
 	return {
         locations: function() {
-            return $http.get("/data/locations.json").then(function(response) {
+            return $http.get("data/locations.json").then(function(response) {
                 return response.data;
             });
         }
     }
 });
+var langController = angular.module('khpostal.locale.controller.locale', []);
+
+langController.controller('LangController', ['$translate', '$scope', '$state', 'leafletData', function ($translate, $scope, $state, leafletData) {
+ 	var vm = this;
+ 	vm.locales = $translate.getAvailableLanguageKeys();
+ 	vm.currentLocale = $translate.use();
+	vm.changeLanguage = function (langKey) {
+		$translate.use(langKey).then(
+			function () {
+
+				leafletData.getMap("khmap").then(
+		   			 function (map) {
+		   			 	
+						map.eachLayer(function (layer) {
+				    		if ( !layer._url) {
+						 		map.removeLayer(layer)
+						 	}
+						}); 
+		   			 	map.setView([12.5446, 105.0470], '8');
+		   		});
+				$state.reload();
+			}
+		)
+	};
+ 
+}]);
+var locale = angular.module('khpostal.locale', [
+        'khpostal.locale.controller.locale',
+    ]
+); 
 var map = angular.module('khpostal.map', [
         'khpostal.map.controller.map',
     ]
@@ -58311,7 +58311,7 @@ khpostal.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$
 	    }]);
 	});
     $translateProvider.useStaticFilesLoader({
-        prefix: '/i18n/',
+        prefix: 'i18n/',
         suffix: '.json'
     });
     $translateProvider
@@ -58327,24 +58327,24 @@ khpostal.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$
     $stateProvider
         .state('404', {
         	parent: 'home',
-    		templateUrl: '/views/errors/404.html'  
+    		templateUrl: 'views/errors/404.html'  
         })
         .state('home', {
                 url: '/',
                 views: {
                     'map': {                        
-                        templateUrl: '/views/map.html',
+                        templateUrl: 'views/map.html',
                         controller: 'MapController',    
                         controllerAs: 'map',
                     },
                     'controls': {
-                        templateUrl: '/views/controls.html',
+                        templateUrl: 'views/controls.html',
                         controller: "LocationsController",
                         controllerAs: 'controls',
                     },
 
                     'locale': {
-                        templateUrl: '/views/locale.html',
+                        templateUrl: 'views/locale.html',
                         controller: "LangController",
                         controllerAs: 'locale',
                     },
