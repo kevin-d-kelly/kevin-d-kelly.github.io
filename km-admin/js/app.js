@@ -58231,7 +58231,7 @@ var locationsService = angular.module('khpostal.locations.service.locations', []
 locationsService.service('locationService', function($http) { 
 	return {
         locations: function() {
-            return $http.get("data/locations.json").then(function(response) {
+            return $http.get("/km-admin/data/locations.json").then(function(response) {
                 return response.data;
             });
         }
@@ -58311,7 +58311,7 @@ khpostal.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$
 	    }]);
 	});
     $translateProvider.useStaticFilesLoader({
-        prefix: 'i18n/',
+        prefix: '/km-admin/i18n/',
         suffix: '.json'
     });
     $translateProvider
@@ -58327,24 +58327,24 @@ khpostal.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$
     $stateProvider
         .state('404', {
         	parent: 'home',
-    		templateUrl: '/views/errors/404.html'  
+    		templateUrl: '/km-admin/views/errors/404.html'  
         })
         .state('home', {
                 url: '/',
                 views: {
                     'map': {                        
-                        templateUrl: 'views/map.html',
+                        templateUrl: '/km-admin/views/map.html',
                         controller: 'MapController',    
                         controllerAs: 'map',
                     },
                     'controls': {
-                        templateUrl: 'views/controls.html',
+                        templateUrl: '/km-admin/views/controls.html',
                         controller: "LocationsController",
                         controllerAs: 'controls',
                     },
 
                     'locale': {
-                        templateUrl: 'views/locale.html',
+                        templateUrl: '/km-admin/views/locale.html',
                         controller: "LangController",
                         controllerAs: 'locale',
                     },
