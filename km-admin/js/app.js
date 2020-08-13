@@ -58119,9 +58119,9 @@ locationsController.controller('LocationsController', [ '$translate', 'locationS
 				//set the icon image
 
 		    	if (type == "province") {
-		    		customUrl = 'img/pin-green-3.png';
+		    		customUrl = '/km-admin/img/pin-green-3.png';
 		    	} else if (type == "district") {
-		    		customUrl = 'img/pin-red-3.png';	
+		    		customUrl = '/km-admin/img/pin-red-3.png';	
 		    	}
 
 		    	var mapMarkers = [];
@@ -58240,7 +58240,7 @@ var locationsService = angular.module('khpostal.locations.service.locations', []
 locationsService.service('locationService', function($http) { 
 	return {
         locations: function() {
-            return $http.get("data/locations.json").then(function(response) {
+            return $http.get("/km-admin/data/locations.json").then(function(response) {
                 return response.data;
             });
         }
@@ -58339,7 +58339,7 @@ khpostal.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$
     		templateUrl: '/km-admin/views/errors/404.html'  
         })
         .state('home', {
-                url: '/',
+                url: '/km-admin/',
                 views: {
                     'map': {                        
                         templateUrl: '/km-admin/views/map.html',
