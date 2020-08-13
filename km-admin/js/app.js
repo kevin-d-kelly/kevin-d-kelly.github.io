@@ -58227,7 +58227,7 @@ langController.controller('LangController', ['$translate', '$scope', '$state', '
 						}); 
 		   			 	map.setView([12.5446, 105.0470], '8');
 		   		});
-				$state.reload();
+				$state.reload('home');
 			}
 		)
 	};
