@@ -1,5 +1,8 @@
 		
         <header data-ng-class="locale.currentLocale">
+        	<button class="sidebar" data-ng-click="locale.showMenu()">
+        		<i class="icon-menu"></i>
+        	</button>
             <h1 data-translate="ui.title"></h1>   
 			<div data-ng-repeat="language in locale.locales" data-ng-if="language !== locale.currentLocale" class="language">
 	          <button data-ng-click="locale.changeLanguage(language)">
