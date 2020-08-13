@@ -39,14 +39,14 @@
         </section>
         <footer data-ng-class="controls.currentLocale">
             <nav>
-            	<div data-ng-if="controls.selectedProvince">
+            	<div class="nav" data-ng-if="controls.selectedProvince">
             		<span data-translate="provinces.{{controls.selectedProvince.identifier}}"> > </span>
             	</div>
-                <div data-ng-if="controls.selectedDistrict" >	
+                <div class="nav" data-ng-if="controls.selectedDistrict" >	
 					<i class="icon-arrow-right"></i>
                 	<span data-translate="districts.{{controls.selectedDistrict.identifier}}"> > </span>
                 </div>
-                <div data-ng-if="controls.selectedCommune" >
+                <div class="nav" data-ng-if="controls.selectedCommune" >
 					<i class="icon-arrow-right"></i>
                 	<span data-translate="communes.{{controls.selectedCommune.identifier}}"></span>
                 </div>
